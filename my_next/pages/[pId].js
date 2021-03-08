@@ -3,6 +3,7 @@ import path from "path";
 
 const productDetail = (props) => {
   const { payload } = props;
+  if (!payload) return <h1>loading</h1>;
   return (
     <>
       <h1>{payload.title}</h1>
@@ -10,32 +11,41 @@ const productDetail = (props) => {
     </>
   );
 };
-export async function getStaticProps(context) {
-  const { params } = context; //由NextJS定義提供參數
-  const productID = params.pId;
+
+const getData = async () => {
   const filePath = path.join(process.cwd(), "data", "dummyBack.json");
   const jsonData = await fs.readFile(filePath);
   const data = JSON.parse(jsonData);
+  return data;
+};
 
-  //   const product = data.products.find((product) => product.id === productID);
-  console.log("data", data);
-
+export async function getStaticProps(context) {
+  const { params } = context; //由NextJS定義提供參數
+  const productID = params.pId;
+  const data = await getData();
+  const product = data.products.find((product) => product.id === productID);
+  if (!product) {
+    return { notFound: true };
+  }
   return {
     props: {
-      payload: data.products.find((product) => product.id === productID),
+      payload: product,
     },
     revalidate: 10,
   };
 }
 
 export async function getStaticPaths() {
+  const data = await getData();
+  const pathList = data.products.reduce(
+    (acu, product) => [...acu, { params: { pId: product.id } }],
+    []
+  );
+
   return {
-    paths: [
-      { params: { pId: "P1" } },
-      { params: { pId: "P2" } },
-      { params: { pId: "P3" } },
-    ],
-    fallback: false,
+    paths: pathList,
+    //if id is not exist，we still want to perform page
+    fallback: true,
   };
 }
 export default productDetail;
