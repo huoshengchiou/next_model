@@ -1,7 +1,7 @@
 import React from "react";
 import Head from "./Head";
 
-export const Layout = (props) => {
+const Layout = (props) => {
   return (
     <>
       <Head />
@@ -9,3 +9,4 @@ export const Layout = (props) => {
     </>
   );
 };
+export default Layout;
