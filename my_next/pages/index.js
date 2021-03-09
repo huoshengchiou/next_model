@@ -1,11 +1,28 @@
 import fs from "fs/promises"; //node file system //如果在client side執行會fail，因為bowser不支援
 import path from "path";
 import Link from "next/link";
+import Head from "next/head";
+import Image from "next/image";
 //second run
 const MainPage = (props) => {
   const { products } = props;
   return (
     <div>
+      <Head>
+        <title>NextJS test</title>
+        {/* <Image
+          src="https://images.pexels.com/photos/6748075/pexels-photo-6748075.jpeg"
+          alt=""
+          width={340}
+          height={160}
+        /> */}
+        {/* <img
+          src="https://images.pexels.com/photos/6748075/pexels-photo-6748075.jpeg"
+          alt=""
+        /> */}
+        {/* SEO */}
+        <meta name="my self meta" content="test meta here" />
+      </Head>
       <h1>Home page</h1>
       <ul>
         {products.map((product, idx) => (
