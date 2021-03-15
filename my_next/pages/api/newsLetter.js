@@ -21,7 +21,7 @@ const handler = async (rq, rs) => {
     //   client.close();
     // });
     const client = await MongoClient.connect(
-      "mongodb+srv://Sheng:pk110291@cluster0.vxq0w.mongodb.net/events?retryWrites=true&w=majority"
+      `mongodb+srv://${process.env.mongoDB_userName}:${process.env.mongoDB_passWord}@${process.env.mongoDB_clusterName}.vxq0w.mongodb.net/${process.env.mongoDB_dataBase}?retryWrites=true&w=majority`
     );
     //connect to DB，上面string有給.net/newsLetterReg，所以不用再輸入
     const db = client.db();
