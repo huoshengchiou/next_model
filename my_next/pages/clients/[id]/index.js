@@ -2,7 +2,7 @@ const ClientWithID = () => {
   return <div>projects with a client</div>;
 };
 
-export async function getStaticPaths() {
+export const getStaticPaths = async () => {
   return {
     paths: [
       { params: { pid: "p1" } },
@@ -11,6 +11,6 @@ export async function getStaticPaths() {
     ],
     fallback: false,
   };
-}
+};
 
 export default ClientWithID;

@@ -19,7 +19,7 @@ const getData = async () => {
   return data;
 };
 
-export async function getStaticProps(context) {
+export const getStaticProps = async (context) => {
   const { params } = context; //由NextJS定義提供參數
   const productID = params.pId;
   const data = await getData();
@@ -33,9 +33,9 @@ export async function getStaticProps(context) {
     },
     revalidate: 10,
   };
-}
+};
 
-export async function getStaticPaths() {
+export const getStaticPaths = async () => {
   const data = await getData();
   const pathList = data.products.reduce(
     (acu, product) => [...acu, { params: { pId: product.id } }],
@@ -47,5 +47,5 @@ export async function getStaticPaths() {
     //if id is not exist，we still want to perform page
     fallback: true,
   };
-}
+};
 export default productDetail;
