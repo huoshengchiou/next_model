@@ -3,12 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 5555",
     "build": "next build",
     "start": "next start",
     "export": "next export"
   },
   "dependencies": {
+    "js-cookie": "^2.2.1",
     "mongodb": "^3.6.4",
     "next": "10.0.7",
     "react": "17.0.1",

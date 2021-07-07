@@ -1,4 +1,6 @@
 import { useEffect } from "react";
+import { setCookie, getCookie } from "../lib/cookie";
+
 import "../styles/globals.css";
 import Layout from "../components/Layout";
 import Head from "next/head";
@@ -11,18 +13,24 @@ import { composeWithDevTools } from "redux-devtools-extension";
 
 import allReducers from "../reducers";
 
-// console.log({ window });
+console.log({ window: typeof window });
 
 const store = createStore(
   allReducers,
   composeWithDevTools(applyMiddleware(...[]))
 );
+let store2;
+if (typeof window === "undefined") {
+  store2 = "123";
+}
+
 // eslint-disable-next-line
 //render every display page
 //Component NextJS會自動設定
 function MyApp({ Component, pageProps }) {
   useEffect(() => {
     console.log("apploading");
+    setCookie("theme", "dark");
   }, []);
   return (
     <NotificationProvider>
@@ -45,3 +53,12 @@ function MyApp({ Component, pageProps }) {
 }
 
 export default MyApp;
+
+MyApp.getInitialProps = async ({ ctx }) => {
+  // const { params, req, res } = context;
+  // const result = await getCookie("theme", req.headers.cookie);
+  // console.log({ ctx: ctx.req.headers.cookie });
+  store2 = "456";
+  console.log({ store2 });
+  return { props: { username: "sheng" } };
+};
