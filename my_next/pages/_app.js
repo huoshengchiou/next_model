@@ -10,10 +10,9 @@ import { HelperContextWrapper } from "../helpers/context";
 import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import { composeWithDevTools } from "redux-devtools-extension";
+import { subject1 } from "../subjectOutside";
 
 import allReducers from "../reducers";
-
-console.log({ window: typeof window });
 
 const store = createStore(
   allReducers,
@@ -32,6 +31,8 @@ function MyApp({ Component, pageProps }) {
     console.log("apploading");
     setCookie("theme", "dark");
   }, []);
+  subject1.next("123");
+
   return (
     <NotificationProvider>
       <Layout>

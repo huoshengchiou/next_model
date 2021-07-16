@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev -p 5555",
+    "dev": "next dev -p 3000",
     "build": "next build",
     "start": "next start",
     "export": "next export"
@@ -17,6 +17,7 @@
     "react-redux": "^7.2.4",
     "redux": "^4.1.0",
     "redux-devtools-extension": "^2.13.9",
+    "rxjs": "^7.2.0",
     "sass": "^1.32.8",
     "swr": "^0.4.2"
   }

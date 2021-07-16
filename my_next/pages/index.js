@@ -6,6 +6,7 @@ import Image from "next/image";
 import { useRef, useState, useContext } from "react";
 import NotificationContext from "../store/notificationContext";
 import LetterRegistration from "../components/input/LetterRegistration";
+
 //second run
 const MainPage = (props) => {
   const { products } = props;
